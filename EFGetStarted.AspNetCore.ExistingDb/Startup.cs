@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using EFGetStarted.AspNetCore.ExistingDb.Models;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace EFGetStarted.AspNetCore.ExistingDb
 {
@@ -33,6 +36,9 @@ namespace EFGetStarted.AspNetCore.ExistingDb
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            var connection = @"Server=FAB-NBK-001\CP1_CI_AS_2017;Database=Blogging;Trusted_Connection=True;";
+            services.AddDbContext<BloggingContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
